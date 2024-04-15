@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Form into JSON</title>
+</head>
+
+<body style="margin: 20px">
+
+        <label>Name: <input type="text" id="nameInput"></label><br><br />
+        <label>ID: <input type="number" id="idInput"></label><br><br />
+        <label>Submit-date: <input type="date" id="dateInput" value="2024-01-24"></label><br><br />
+        <label>your email: <input type="email" id="emailInput"></label><br><br />
+        <label>your age: <input type="number" id="ageInput"></label><br><br />
+        <label>Hobby: <input type="text" id="hobbyInput"></label><br><br />
+
+        <label>Gender:</label><br>
+        <label><input type="radio" name="gender" value="Male"> Male</label><br>
+        <label><input type="radio" name="gender" value="Female"> Female</label><br>
+        <label><input type="radio" name="gender" value="Non-Binary"> Non-Binary</label><br><br />
+
+        <label>Car Type:</label>
+        <select id="selectInput">
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Convertible">Convertible</option>
+            <option value="Coupe">Coupe</option>
+        </select><br><br />
+
+        <label>Vegetarian: <input type="checkbox" id="vegetarianInput"></label><br><br />
+
+        <button type="Add" onclick="collectData()">Add</button> 
+        <button type="remove" onclick="removerow()">remove</button>
+    </form>
+    <br />
+    <div id="result"></div>
+    <script>
+        const arr = []
+
+        function collectData(e) {
+            const data = {
+                name: '',
+                id: 0,
+                sub_date: null,
+                email: '',
+                age: "",
+                hobby : "",
+                gender: '',
+                carType: '',
+                vegetarian: ''
+            } // { }
+
+            data.name = document.getElementById('nameInput').value
+            data.id = document.getElementById('idInput').value
+            data.sub_date = document.getElementById('dateInput').value
+            data.email = document.getElementById('emailInput').value
+            data.age = document.getElementById("ageInput").value
+            data.hobby = document.getElementById("hobbyInput").value
+            data.gender = document.querySelector('input[name="gender"]:checked') ?
+                document.querySelector('input[name="gender"]:checked').value : ''
+            data.carType = document.getElementById('selectInput').value
+            data.vegetarian = document.getElementById('vegetarianInput').checked
+       
+            arr.push(data)
+
+            document.getElementById('result').innerHTML = JSON.stringify(arr) + "<br />"
+        }
+
+        function removerow() {
+            arr.pop() 
+          document.getElementById("result").innerHTML = JSON.stringify(arr)  
+        }
+        
+
+        // add a field called age - input type number, to the json
+        // add a field called hobby - input type text, to the json
+        // add a button which removes the last document. hint: pop
+        //             also print the arr after pop
+    </script>
+</body>
+
+</html>
